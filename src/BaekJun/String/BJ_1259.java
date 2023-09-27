@@ -1,4 +1,4 @@
-package baekJun.string;
+package BaekJun.String;
 
 import java.util.Arrays;
 import java.util.Scanner;
