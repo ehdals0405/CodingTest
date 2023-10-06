@@ -35,7 +35,7 @@ public class BJ_17298 {
             stack.push(i);
         }
 
-        // 스택에 남아있는 숫자들은 오큰수가 없으므로 -1로 바꿔줌
+        // 스택에 남아있는 인덱스들은 오큰수가 없으므로 -1로 바꿔줌
         while (!stack.isEmpty()){
             nums[stack.pop()] = -1;
         }
