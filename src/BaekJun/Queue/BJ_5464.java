@@ -48,6 +48,7 @@ public class BJ_5464 {
                         parking[j] = carNum;
                         continue find;
                     }
+
                 }
                 // 자리 없으면 대기순위에 넣기
                 waiting.add(carNum);
