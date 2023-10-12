@@ -1,4 +1,4 @@
-package BaekJun.Hash;
+package Algorithm.Hash;
 
 import java.util.*;
 
