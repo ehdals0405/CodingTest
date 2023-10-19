@@ -13,31 +13,31 @@ public class BJ_26043 {
         StringTokenizer st;
 
         // 좋아하는 메뉴 먹은 학생 목록
-        List<String> A = new LinkedList<>();
+        ArrayList<Integer> A = new ArrayList<>();
         // 식사만 한 학생 목록
-        List<String> B = new LinkedList<>();
+        ArrayList<Integer> B = new ArrayList<>();
         // 못먹은 학생 목록
-        List<String> C = new LinkedList<>();
-
+        ArrayList<Integer> C = new ArrayList<>();
 
         Queue<Student> students = new LinkedList<>();
+
         int N = Integer.parseInt(br.readLine());
         // 반복 횟수
-        while (N-- > 0) {
+        for (int i = 0; i < N; i++) {
 
             st = new StringTokenizer(br.readLine(), " ");
             // 유형 1 또는 2 확인
             int type = Integer.parseInt(st.nextToken());
             // 1 유형은 학생이므로 학생 정보를 넣고 queue에 넣어줌
             if (type == 1) {
-                String num = st.nextToken();
-                String favorite = st.nextToken();
+                int num = Integer.parseInt(st.nextToken());
+                int favorite = Integer.parseInt(st.nextToken());
                 students.add(new Student(num, favorite));
             } else {
                 // 2 유형은 메뉴 정보를 queue에 넣어줌
-                String menu = st.nextToken();
+                int menu = Integer.parseInt(st.nextToken());
                 Student student = students.poll();
-                if (student.favorite.equals(menu)) {
+                if (student.favorite == menu) {
 
                     A.add(student.num);
                 } else B.add(student.num);
@@ -48,10 +48,6 @@ public class BJ_26043 {
         while (!students.isEmpty()) {
             C.add(students.poll().num);
         }
-        // 정렬
-        Collections.sort(A);
-        Collections.sort(B);
-        Collections.sort(C);
 
         // 출력
         print(A);
@@ -61,27 +57,30 @@ public class BJ_26043 {
 
     }
 
-    static void print(List<String> list) {
+    static void print(List<Integer> list) {
+
         if (list.isEmpty()) {
             System.out.println("None");
         } else {
-            for (String s : list) {
-                System.out.print(s + " ");
+            Collections.sort(list);
+            StringBuilder sb = new StringBuilder();
+            for (int i : list) {
+                sb.append(i + " ");
             }
-            System.out.println();
+            System.out.println(sb);
         }
     }
 
     // 학생 정보
     static class Student {
 
-        Student(String num, String favorite) {
+        Student(int num, int favorite) {
             this.num = num;
             this.favorite = favorite;
         }
 
-        String num;
-        String favorite;
+        int num;
+        int favorite;
     }
 }
 

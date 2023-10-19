@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.StringTokenizer;
 
 public class BJ_1931 {
@@ -25,6 +26,7 @@ public class BJ_1931 {
             if(o1[1] == o2[1]) return o1[0] - o2[0];
             return  o1[1] - o2[1];
         });
+
 
         int count = 0;
         int endTime = 0;
