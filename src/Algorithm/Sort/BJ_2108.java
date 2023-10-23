@@ -34,6 +34,7 @@ public class BJ_2108 {
             // 얼마나 등장했는지 최대치를 카운팅
             max = Math.max(countingSort[array[i] + 4000], max);
         }
+
         for (int i = 0; i < 8001; i++) {
             // 등장 수와 같으면 최빈값으로 넣어주기
             // 2개 이상 안넣어도 됌
