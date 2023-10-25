@@ -3,9 +3,7 @@ package Algorithm.Sort;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class BJ_11000 {
     public static void main(String[] args) throws IOException {
@@ -13,19 +11,14 @@ public class BJ_11000 {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
 
-        // 시작순으로 정렬, 시작시간이 같으면 종료시간으로 정렬
-        // 다음 강의의 시작시간이 현재 강의 종료시간보다 작으면 강의실 1개 추가
-        // 강의실 Max 치 갱신하기
-
         int N = Integer.parseInt(br.readLine());
-        st = new StringTokenizer(br.readLine());
-
         int[][] lectureList = new int[N][2];
-        int lectureRoom = 1;
 
+        // 강의 정보 입력받기
         for (int i = 0; i < N; i++) {
 
             int[] lecture = new int[2];
+            st = new StringTokenizer(br.readLine());
             int start = Integer.parseInt(st.nextToken());
             int end = Integer.parseInt(st.nextToken());
 
@@ -35,27 +28,30 @@ public class BJ_11000 {
             lectureList[i] = lecture;
         }
 
+        // 시작순으로 정렬, 시작시간이 같으면 종료시간으로 정렬
         Arrays.sort(lectureList, (o1, o2) -> {
             if (o1[0] == o2[0]) return o1[1] - o2[1];
             return o1[0] - o2[0];
         });
 
-        int start = lectureList[0][0];
-        int end = lectureList[0][1];
+        // 우선순위 큐에 종료 시간을 넣고 다음 강의 시작시간이 종료 시간보다 작으면
+        // 강의실을 하나 더 써야하니까 종료 시간 하나 더 추가
+        // 종료 시간과 시작 시간이 같거나 시작 시간이 더 크면 그 강의실 쓰면 됨
+        PriorityQueue<Integer> queue = new PriorityQueue<>();
+
+        // 첫 강의
+        queue.add(lectureList[0][1]);
 
         for (int i = 1; i < lectureList.length; i++) {
 
-            while (true) {
-                int count = 1;
-                int nextStart = lectureList[i][0];
-                int nextEnd = lectureList[i][1];
-
-                if (end > nextStart) count++;
-                if (nextEnd > end)
-                    end = nextEnd;
+            // 끝나는 시간이 더 짧으면 앞의 강의 빼기
+            if (queue.peek() <= lectureList[i][0]){
+                queue.poll();
             }
 
-
+            queue.add(lectureList[i][1]);
         }
+
+        System.out.println(queue.size());
     }
 }
