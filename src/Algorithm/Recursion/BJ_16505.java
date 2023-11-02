@@ -1,4 +1,4 @@
-package Algorithm.Recusive;
+package Algorithm.Recursion;
 
 import java.util.Scanner;
 
@@ -57,3 +57,18 @@ public class BJ_16505 {
         drawStar(depth + 1, row, col + size);
     }
 }
+
+//depth 0
+//
+//size = 1
+//draw 1 0 0 size =2 draw 2 0 0    ****
+//        draw 2 2 0               * *
+//        draw 2 0 2               **
+//                                 *
+//draw 1 1 0 size = 2 draw 2 1 0
+//        draw 2 3 0
+//        draw 2 1 2
+//
+//draw 1 0 1 draw 2 0 1
+//draw 2 2 1
+//draw 2 0 3

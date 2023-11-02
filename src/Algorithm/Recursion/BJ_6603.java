@@ -1,4 +1,4 @@
-package Algorithm.Recusive;
+package Algorithm.Recursion;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -28,8 +28,8 @@ public class BJ_6603 {
 
             result = new int[6];
             visited = new boolean[k];
-
             selectNum(0, 0);
+
             System.out.println(sb);
         }
     }
@@ -37,20 +37,24 @@ public class BJ_6603 {
     // 숫자 6개 조합
     static void selectNum(int start, int depth) {
 
+        // 종료 조건
         if (depth == 6) {
-            for (int i = 0; i < k; i++) {
-                if (visited[i]) {
-                    System.out.print(nums[i] + " ");
-                }
+            for (int i : result) {
+                sb.append(i + " ");
             }
-            System.out.println();
+            sb.append("\n");
+            return;
         }
-
+        // 재귀 호출
+        // 같은 숫자는 여러번 나오면 안되게 제외
         for (int i = start; i < k; i++) {
-            visited[i] = true;
-            selectNum(i + 1, depth + 1);
-            visited[i] = false;
-        }
+            if (!visited[i]) {
+                visited[i] = true;
+                result[depth] = nums[i];
+                selectNum(i, depth + 1);
+                visited[i] = false;
+            }
 
+        }
     }
 }

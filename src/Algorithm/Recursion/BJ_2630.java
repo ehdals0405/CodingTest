@@ -1,4 +1,4 @@
-package Algorithm.Recusive;
+package Algorithm.Recursion;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.StringTokenizer;
 
 public class BJ_2630 {
 
-    static int withe = 0;
+    static int white = 0;
     static int blue = 0;
 
     static int[][] graph;
@@ -30,7 +30,7 @@ public class BJ_2630 {
         }
         partition(0, 0, N);
 
-        sb.append(withe + "\n").append(blue);
+        sb.append(white + "\n").append(blue);
         System.out.println(sb);
     }
 
@@ -40,7 +40,7 @@ public class BJ_2630 {
         if (colorCheck(row, col, size)) {
             // 종이 카운트 1개 증가
             if (graph[row][col] == 0) {
-                withe++;
+                white++;
             } else {
                 blue++;
             }
