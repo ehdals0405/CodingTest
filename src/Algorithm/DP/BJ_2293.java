@@ -34,6 +34,19 @@ public class BJ_2293 {
         for (int i = 0; i < N; i++) {
             coin[i] = Integer.parseInt(br.readLine());
         }
+        dp[0] = 1;
 
+        /*
+         누적합 구하기
+         dp 배열은 현재 사용하는 동전값보다 클 때만 변동
+         이전 가짓수 + (현재 금액 - 현재 동전값)의 가짓수를 더하면 현재 금액의 가짓수
+         */
+        for (int i = 0; i < N; i++) {
+            for (int j = 1; j <= K; j++) {
+                if (j >= coin[i])
+                    dp[j] += dp[j - coin[i]];
+            }
+        }
+        System.out.println(dp[K]);
     }
 }
