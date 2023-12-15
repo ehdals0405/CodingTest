@@ -10,39 +10,35 @@ public class PG_신고결과받기 {
         int[] solution = pg_신고결과받기.solution(new String[]{"muzi", "frodo", "apeach", "neo"}, new String[]{"muzi frodo", "apeach frodo", "frodo neo", "muzi neo", "apeach muzi"}, 2);
         System.out.println(Arrays.toString(solution));
     }
+
     public int[] solution(String[] id_list, String[] report, int k) {
 
-        // 맵에 신고자와 신고받은 사람을 저장
-        // 신고 받은 사람이 k 이상이면 메일 보내기
-
+        // 맵에 신고받은 사람과 신고한 사람을 저장
+        // 신고한 사람이 k 이상이면 신고한 사람에게 메일 보내기
+        // 이름과 인덱스 값을 저장할 맵도 추가
+        Map<String, HashSet<String>> reporting = new HashMap<>();
+        Map<String, Integer> idx = new HashMap<>();
         int[] answer = new int[id_list.length];
-        Map<String, HashSet<String>> map = new HashMap<>();
-        Map<String, Integer> idxMap = new HashMap<>();
 
-        //id_list의 이름을 name 변수에 저장하여 map과 idxMap에 저장
         for (int i = 0; i < id_list.length; i++) {
             String name = id_list[i];
-            map.put(name, new HashSet<>());
-            idxMap.put(name, i);
+            idx.put(name, i);
+            reporting.put(name, new HashSet<>());
         }
 
-        //report 배열의 인덱스를 split으로 쪼개고, map의 신고당한 유저(to)에 선언된
-        //Set에 신고한 유저(from) 추가
         for (String s : report) {
-            String[] str = s.split(" ");	//"muzi frodo"
-            String from = str[0];			//str[0] = "muzi"
-            String to = str[1];				//str[1] = "frodo"
-            map.get(to).add(from);
+            String[] name = s.split(" ");
+            String reporter = name[0];
+            String reported = name[1];
+
+            reporting.get(reported).add(reporter);
         }
 
-        //map에서 id_list 배열의 값을 키로 하여 값을 가져와
-        //send Set에 담아주고, 2회 이상 등록된 유저의 인덱스를
-        //idxMap에서 가져와 answer 배열의 값을 +!
-        for (int i = 0; i < id_list.length; i++) {
-            HashSet<String> send = map.get(id_list[i]);
-            if (send.size() >= k) {
-                for (String name : send) {
-                    answer[idxMap.get(name)]++;
+        for (String name : reporting.keySet()) {
+            Set<String> set = reporting.get(name);
+            if (set.size() >= k) {
+                for (String s : set) {
+                    answer[idx.get(s)]++;
                 }
             }
         }
