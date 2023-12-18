@@ -37,12 +37,12 @@ public class PG_다리를지나가는트럭 {
                 } else {
 
                     // 다음 트럭으로 무게초과가 될 시
-                    if (bridgeSum + truck > weight){
+                    if (bridgeSum + truck > weight) {
 
                         bridge.add(0);
                         time++;
 
-                    }else {
+                    } else {
 
                         bridge.add(truck);
                         bridgeSum += truck;
@@ -56,7 +56,7 @@ public class PG_다리를지나가는트럭 {
         }
 
         // 마지막 트럭 통과 시간
-        int answer = time+bridge_length;
+        int answer = time + bridge_length;
         return answer;
     }
 }
